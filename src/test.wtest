@@ -1,0 +1,60 @@
+import formaciones.*
+import locomotoras.*
+import deposito.*
+import vagones.*
+
+describe "Tests de trenes" {
+	var formacion = new Formaciones()
+	var locomotoraLenta = new Locomotora(velMax=70)
+	var locomotora = new Locomotora()
+	var vagonPasajeros = new VagonPasajeros()
+	var vagonCarga= new VagonCarga()
+	var deposito = new Deposito()
+	
+	test "Velocidad maxima de una formacion" {
+
+	formacion.agregarLocomotora(locomotoraLenta)
+	formacion.agregarLocomotora(locomotora)
+	assert.equals(70, formacion.velMax())
+
+}
+
+	test "Si una locomotora es eficiente"{
+		formacion.agregarLocomotora(locomotora)
+		assert.that(formacion.eficiente())
+		
+	}
+
+	test "Si una formacion puede moverse"{
+		formacion.agregarLocomotora(locomotora)
+		formacion.agregarVagon(vagonCarga)
+		
+		assert.that(formacion.puedeMoverse())
+	}
+	
+	test "Cuantos kilos faltan a una formacion para poder moverse"{
+		
+		formacion.agregarVagon(vagonCarga)
+		formacion.agregarVagon(vagonPasajeros)
+		formacion.agregarLocomotora(locomotora)
+		
+		assert.equals(0, formacion.arrastreFaltante())
+		
+		
+	}
+	
+	test "Vagon mas pesado de cada formacion"{
+		var vagonPesado = new VagonCarga(cargaMaxima=99999)
+		var formacion2 = new Formaciones()
+		formacion.agregarVagon(vagonPesado)
+		formacion.agregarVagon(vagonCarga)
+		
+		formacion2.agregarVagon(vagonCarga)
+		formacion2.agregarVagon(vagonPesado)
+		deposito.agregarFormacion(formacion)
+		deposito.agregarFormacion(formacion2)
+		
+		assert.equals([vagonPesado, vagonPesado],deposito.vagonMasPesado())
+	}
+
+}

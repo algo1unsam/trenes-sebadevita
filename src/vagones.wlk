@@ -2,7 +2,7 @@ class VagonPasajeros {
 	
 	var largo = 10
 	var anchoUtil = 3
-	var pasajeros
+	var pasajeros = 0
 	
 	method cantidadPasajeros(){
 	
