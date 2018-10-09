@@ -1,5 +1,5 @@
 class VagonPasajeros {
-	
+	const property banos = 2
 	var largo = 10
 	var anchoUtil = 3
 	var pasajeros = 0
@@ -29,7 +29,7 @@ class VagonPasajeros {
 
 
 class VagonCarga{
-	
+	const property banos = 0
 	var cargaMaxima = 5000
 	
 	method cantidadPasajeros ()= 0

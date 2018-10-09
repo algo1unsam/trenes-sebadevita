@@ -2,24 +2,26 @@ import formaciones.*
 import locomotoras.*
 import deposito.*
 import vagones.*
+import formacionesCortaDistancia.*
+import formacionesLargaDistancia.*
 
 describe "Tests de trenes" {
-	var formacion = new Formaciones()
+	var formacion = new FormacionCortaDistancia()
 	var locomotoraLenta = new Locomotora(velMax=70)
 	var locomotora = new Locomotora()
 	var vagonPasajeros = new VagonPasajeros()
 	var vagonCarga= new VagonCarga()
 	var deposito = new Deposito()
 	
-	test "Velocidad maxima de una formacion" {
+	test "Formacion corta: Velocidad maxima" {
 
 	formacion.agregarLocomotora(locomotoraLenta)
 	formacion.agregarLocomotora(locomotora)
-	assert.equals(70, formacion.velMax())
+	assert.equals(60, formacion.velMax())
 
 }
 
-	test "Si una locomotora es eficiente"{
+	test "Locomotoras : Si es eficiente"{
 		formacion.agregarLocomotora(locomotora)
 		assert.that(formacion.eficiente())
 		
@@ -43,18 +45,6 @@ describe "Tests de trenes" {
 		
 	}
 	
-	test "Vagon mas pesado de cada formacion"{
-		var vagonPesado = new VagonCarga(cargaMaxima=99999)
-		var formacion2 = new Formaciones()
-		formacion.agregarVagon(vagonPesado)
-		formacion.agregarVagon(vagonCarga)
-		
-		formacion2.agregarVagon(vagonCarga)
-		formacion2.agregarVagon(vagonPesado)
-		deposito.agregarFormacion(formacion)
-		deposito.agregarFormacion(formacion2)
-		
-		assert.equals([vagonPesado, vagonPesado],deposito.vagonMasPesado())
-	}
+	
 
 }
